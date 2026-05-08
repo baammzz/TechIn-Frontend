@@ -123,8 +123,7 @@ export default function Dashboard() {
           </div>
 
           <div className="operator">
-            <span>Tuesday, 14 May 2024</span>
-            <UserCircle size={38} />
+            <span>13 May 2026</span>
           </div>
         </header>
 

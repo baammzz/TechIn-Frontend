@@ -347,8 +347,7 @@ export default function FaultDashboard() {
           </div>
 
           <div className="fault-operator">
-            <span>Control Room Operator</span>
-            <UserCircle size={38} />
+            <span>13 May 2026</span>
           </div>
         </header>
 

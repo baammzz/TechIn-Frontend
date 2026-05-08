@@ -146,8 +146,7 @@ export default function AdminPanel() {
           </div>
 
           <div className="admin-top-user">
-            <span>{currentUser}</span>
-            <UserCircle size={38} />
+            <span>13 May 2026</span>
           </div>
         </header>
 
