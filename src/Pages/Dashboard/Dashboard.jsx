@@ -12,6 +12,7 @@ import {
   ClipboardList,
   Zap,
   ShieldCheck,
+  FilePlus,
   LogOut
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -65,6 +66,11 @@ export default function Dashboard() {
       <AlertCircle size={22} />
       <span>Faults</span>
     </NavLink>
+
+    <NavLink to="/log-fault" className="fault-menu-item">
+  <FilePlus size={22} />
+  <span>Log Fault</span>
+</NavLink>
 
     <NavLink to="/tools" className="menu-item">
       <Wrench size={22} />

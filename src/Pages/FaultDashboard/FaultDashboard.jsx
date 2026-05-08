@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./FaultDashboard.css";
 import {
   Home,
@@ -14,7 +15,12 @@ import {
   ShieldCheck,
   Shield,
   AlertTriangle,
-  LogOut
+  LogOut,
+  FilePlus,
+  Clock,
+  CheckCircle2,
+  XCircle,
+  Activity
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -55,8 +61,195 @@ function CriticalRow({ title, subtitle }) {
   );
 }
 
+function ReportFaultForm() {
+  return (
+    <section className="report-fault-card">
+      <div className="report-fault-header">
+        <div>
+          <p>Fault Reporting</p>
+          <h2>Report a New Fault</h2>
+        </div>
+        <FilePlus size={34} />
+      </div>
+
+      <form className="report-fault-form">
+        <div className="form-row">
+          <label>
+            Fault Title
+            <input type="text" placeholder="e.g. Signal failure" />
+          </label>
+
+          <label>
+            Location
+            <input type="text" placeholder="e.g. Waterloo Station" />
+          </label>
+        </div>
+
+        <div className="form-row">
+          <label>
+            Platform / Area
+            <input type="text" placeholder="e.g. Platform C" />
+          </label>
+
+          <label>
+            Severity
+            <select defaultValue="">
+              <option value="" disabled>Select severity</option>
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+              <option>Critical</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Fault Description
+          <textarea placeholder="Describe the fault, impact, and any immediate action taken..." />
+        </label>
+
+        <div className="form-actions">
+          <button type="reset" className="secondary-button">Clear</button>
+          <button type="submit" className="primary-button">Submit Fault</button>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+function StatusBadge({ status }) {
+  const className = status.toLowerCase().replaceAll(" ", "-");
+  return <span className={`fault-status-badge ${className}`}>{status}</span>;
+}
+
+function FaultStatusPage() {
+  const faults = [
+    {
+      fault: "Train Engine Failure",
+      location: "Victoria Station",
+      platform: "Platform C",
+      severity: "Critical",
+      status: "In Progress",
+      engineer: "Engineer A",
+      updated: "14:47"
+    },
+    {
+      fault: "Electricity Outage",
+      location: "Waterloo Station",
+      platform: "Main Concourse",
+      severity: "Critical",
+      status: "Open",
+      engineer: "Engineer B",
+      updated: "14:41"
+    },
+    {
+      fault: "Train Oil Leak",
+      location: "Westminster Station",
+      platform: "Platform D",
+      severity: "Critical",
+      status: "Awaiting Parts",
+      engineer: "Engineer C",
+      updated: "14:35"
+    },
+    {
+      fault: "Signal Delay",
+      location: "Clapham Junction",
+      platform: "Platform 2",
+      severity: "Medium",
+      status: "In Progress",
+      engineer: "Engineer E",
+      updated: "13:58"
+    },
+    {
+      fault: "Door Sensor Fault",
+      location: "Epsom Station",
+      platform: "Platform A",
+      severity: "Low",
+      status: "Resolved",
+      engineer: "Engineer F",
+      updated: "13:22"
+    }
+  ];
+
+  return (
+    <section className="fault-status-page">
+      <div className="status-overview-grid">
+        <div className="status-overview-card open">
+          <div>
+            <p>Open Faults</p>
+            <h2>2</h2>
+          </div>
+          <AlertCircle size={34} />
+        </div>
+
+        <div className="status-overview-card progress">
+          <div>
+            <p>In Progress</p>
+            <h2>2</h2>
+          </div>
+          <Clock size={34} />
+        </div>
+
+        <div className="status-overview-card waiting">
+          <div>
+            <p>Awaiting Parts</p>
+            <h2>1</h2>
+          </div>
+          <Activity size={34} />
+        </div>
+
+        <div className="status-overview-card resolved">
+          <div>
+            <p>Resolved Today</p>
+            <h2>12</h2>
+          </div>
+          <CheckCircle2 size={34} />
+        </div>
+      </div>
+
+      <div className="fault-status-card">
+        <div className="fault-status-header">
+          <div>
+            <p>Live Fault Tracking</p>
+            <h2>Fault Status Board</h2>
+          </div>
+          <button className="primary-button">Refresh Status</button>
+        </div>
+
+        <table className="fault-status-table">
+          <thead>
+            <tr>
+              <th>Fault</th>
+              <th>Location</th>
+              <th>Platform / Area</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>Assigned To</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {faults.map((item) => (
+              <tr key={`${item.fault}-${item.updated}`}>
+                <td>{item.fault}</td>
+                <td>{item.location}</td>
+                <td>{item.platform}</td>
+                <td><span className={`severity-pill ${item.severity.toLowerCase()}`}>{item.severity}</span></td>
+                <td><StatusBadge status={item.status} /></td>
+                <td>{item.engineer}</td>
+                <td>{item.updated}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
 export default function FaultDashboard() {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("faults");
   const currentUser = localStorage.getItem("currentUser") || "Engineer";
   return (
     <div className="fault-page">
@@ -127,7 +320,29 @@ export default function FaultDashboard() {
 
       <main className="fault-content">
         <header className="fault-topbar">
-          <h1>Fault Dashboard <span>⚠️</span></h1>
+          <div>
+            <h1>Fault Dashboard <span>⚠️</span></h1>
+            <div className="fault-tabs">
+              <button
+                className={activeTab === "faults" ? "active" : ""}
+                onClick={() => setActiveTab("faults")}
+              >
+                Faults
+              </button>
+              <button
+                className={activeTab === "status" ? "active" : ""}
+                onClick={() => setActiveTab("status")}
+              >
+                Status
+              </button>
+              <button
+                className={activeTab === "report" ? "active" : ""}
+                onClick={() => setActiveTab("report")}
+              >
+                Report Fault
+              </button>
+            </div>
+          </div>
 
           <div className="fault-operator">
             <span>Control Room Operator</span>
@@ -135,6 +350,8 @@ export default function FaultDashboard() {
           </div>
         </header>
 
+        {activeTab === "faults" ? (
+          <>
         <section className="fault-stats-section">
           <StatCard
             title="Engineers Online"
@@ -349,6 +566,12 @@ export default function FaultDashboard() {
 </tbody>
           </table>
         </section>
+          </>
+        ) : activeTab === "status" ? (
+          <FaultStatusPage />
+        ) : (
+          <ReportFaultForm />
+        )}
       </main>
     </div>
   );

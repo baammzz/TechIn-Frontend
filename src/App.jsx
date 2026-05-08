@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import FaultDashboard from "./Pages/FaultDashboard/FaultDashboard.jsx";
 import ToolTracker from "./Pages/ToolTracker/ToolTracker.jsx";
 import AdminPanel from "./Pages/AdminPanel/AdminPanel.jsx";
+import LogFault from "./Pages/LogFault/LogFault.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/faults" element={<FaultDashboard />} />
       <Route path="/tools" element={<ToolTracker />} />
+      <Route path="/log-fault" element={<LogFault />} />
       <Route
   path="/admin"
   element={

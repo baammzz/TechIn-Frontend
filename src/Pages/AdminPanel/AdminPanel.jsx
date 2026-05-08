@@ -1,5 +1,6 @@
 import "./AdminPanel.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import {
   Home,
   AlertCircle,
@@ -62,6 +63,7 @@ function AdminStatCard({ icon, title, value, className }) {
 export default function AdminPanel() {
   const navigate = useNavigate();
   const currentUser = localStorage.getItem("currentUser") || "Admin";
+  const [activeTab, setActiveTab] = useState("users");
 
   function handleLogout() {
     localStorage.removeItem("currentUser");
@@ -178,11 +180,22 @@ export default function AdminPanel() {
         </section>
 
         <div className="admin-tabs">
-  <button className="admin-tab active">User Management</button>
-  <button className="admin-tab">Audit Logs</button>
-</div>
+  <button
+    className={`admin-tab ${activeTab === "users" ? "active" : ""}`}
+    onClick={() => setActiveTab("users")}
+  >
+    User Management
+  </button>
 
-        <section className="admin-table-card">
+  <button
+    className={`admin-tab ${activeTab === "audit" ? "active" : ""}`}
+    onClick={() => setActiveTab("audit")}
+  >
+    Audit Logs
+  </button>
+</div>
+{activeTab === "users" && (
+<section className="admin-table-card">
           <div className="admin-table-header">
             <div>
               <h2>User Accounts</h2>
@@ -238,7 +251,74 @@ export default function AdminPanel() {
           </table>
 
           <button className="admin-view-all">→ View All</button>
-        </section>
+          </section>
+)}
+{activeTab === "audit" && (
+  <section className="admin-table-card">
+    <div className="admin-table-header">
+      <div>
+        <h2>Audit Logs</h2>
+        <p>Track account activity and system actions</p>
+      </div>
+    </div>
+
+    <table className="admin-user-table audit-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>User</th>
+          <th>Action</th>
+          <th>Details</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Today 14:47</td>
+          <td>Admin</td>
+          <td>User Updated</td>
+          <td>Changed Engineer permissions</td>
+          <td>
+            <span className="audit-pill success">Completed</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Today 13:17</td>
+          <td>Engineer</td>
+          <td>Tool Scan</td>
+          <td>Scanned tools at Victoria Station</td>
+          <td>
+            <span className="audit-pill success">Completed</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Today 12:52</td>
+          <td>Admin</td>
+          <td>Login</td>
+          <td>Admin signed in</td>
+          <td>
+            <span className="audit-pill success">Completed</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Yesterday 17:48</td>
+          <td>Michael.A</td>
+          <td>Logout</td>
+          <td>Engineer session ended</td>
+          <td>
+            <span className="audit-pill warning">Logged</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button className="admin-view-all">→ View All</button>
+  </section>
+)}
       </main>
     </div>
   );

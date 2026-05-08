@@ -121,6 +121,11 @@ export default function ToolTracker() {
             <span>Faults</span>
           </NavLink>
 
+          <NavLink to="/log-fault" className="fault-menu-item">
+  <FilePlus size={22} />
+  <span>Log Fault</span>
+</NavLink>
+
           <NavLink to="/tools" className="tool-menu-item active">
             <Wrench size={22} />
             <span>Tool Tracker</span>
