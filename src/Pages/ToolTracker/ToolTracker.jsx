@@ -25,8 +25,10 @@ import {
   Ruler,
   MoreHorizontal,
   ArrowRight,
+  FilePlus,
   Users
 } from "lucide-react";
+import useAutoLogout from "../../Pages/useAutoLogout";
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -99,6 +101,7 @@ function CategoryCard({ icon, title, count, className }) {
 
 export default function ToolTracker() {
     const navigate = useNavigate();
+    useAutoLogout();
     const currentUser = localStorage.getItem("currentUser") || "Not logged in";
 
   return (
@@ -108,7 +111,11 @@ export default function ToolTracker() {
           <TrainFront size={64} strokeWidth={2.5} />
         </div>
 
-        <h2>Railway Maintenance System</h2>
+        <h2>
+  RAILWAY
+  <br />
+  MAINTENANCE SYSTEM
+</h2>
 
         <nav className="tool-menu">
           <NavLink to="/dashboard" className="tool-menu-item">
@@ -120,11 +127,6 @@ export default function ToolTracker() {
             <AlertCircle size={22} />
             <span>Faults</span>
           </NavLink>
-
-          <NavLink to="/log-fault" className="fault-menu-item">
-  <FilePlus size={22} />
-  <span>Log Fault</span>
-</NavLink>
 
           <NavLink to="/tools" className="tool-menu-item active">
             <Wrench size={22} />

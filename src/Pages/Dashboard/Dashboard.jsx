@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import railMap from "../../assets/map.png";
+import useAutoLogout from "../../Pages/useAutoLogout";
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -46,6 +47,7 @@ function StatCard({ title, value, colourClass, cardClass, icon }) {
 export default function Dashboard() {
   const currentUser = localStorage.getItem("currentUser") || "Not logged in";
   const navigate = useNavigate();
+  useAutoLogout();
   return (
     <div className="page">
       {/* SIDEBAR */}
@@ -66,11 +68,6 @@ export default function Dashboard() {
       <AlertCircle size={22} />
       <span>Faults</span>
     </NavLink>
-
-    <NavLink to="/log-fault" className="fault-menu-item">
-  <FilePlus size={22} />
-  <span>Log Fault</span>
-</NavLink>
 
     <NavLink to="/tools" className="menu-item">
       <Wrench size={22} />

@@ -23,6 +23,7 @@ import {
   Activity
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import useAutoLogout from "../../Pages/useAutoLogout";
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -249,6 +250,7 @@ function FaultStatusPage() {
 
 export default function FaultDashboard() {
   const navigate = useNavigate();
+  useAutoLogout();
   const [activeTab, setActiveTab] = useState("faults");
   const currentUser = localStorage.getItem("currentUser") || "Engineer";
   return (
@@ -268,7 +270,7 @@ export default function FaultDashboard() {
 
     <NavLink to="/faults" className="fault-menu-item active">
       <AlertCircle size={22} />
-      <span>Fault Dashboard</span>
+      <span>Faults</span>
     </NavLink>
 
     <NavLink to="/tools" className="fault-menu-item">

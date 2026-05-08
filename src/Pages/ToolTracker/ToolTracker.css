@@ -38,163 +38,339 @@ body,
 
 /* SIDEBAR */
 
+/* SIDEBAR */
+/* SIDEBAR */
+
 .tool-sidebar {
-  width: 260px;
-  background: linear-gradient(180deg, #031b4e 0%, #00112d 100%);
-  padding: 32px 22px;
-  flex-shrink: 0;
-  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-.tool-sidebar::after {
-  content: "";
-  position: absolute;
-  left: -80px;
-  bottom: -80px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(
-    circle,
-    rgba(37, 99, 235, 0.35) 0%,
-    rgba(37, 99, 235, 0.15) 35%,
-    transparent 70%
-  );
-  pointer-events: none;
-}
-
-.tool-logo-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.tool-logo-wrap svg {
-  color: white;
-  background: rgba(37, 99, 235, 0.35);
-  padding: 18px;
-  border-radius: 28px;
-}
-
-.tool-sidebar h2 {
-  color: white;
-  font-size: 18px;
-  line-height: 25px;
-  text-align: center;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin: 0 0 34px;
-  position: relative;
-  z-index: 1;
-}
-
-.tool-menu {
-  margin-top: 6px;
-  position: relative;
-  z-index: 1;
-}
-
-.tool-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 8px 0;
-  padding: 14px 16px;
-  border-radius: 14px;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.85);
-  cursor: pointer;
-  transition: 0.2s ease;
-  text-decoration: none;
-}
-
-.tool-menu-item span {
-  color: inherit;
-}
-
-.tool-menu-item svg {
-  color: rgba(255, 255, 255, 0.75);
-  min-width: 24px;
-}
-
-.tool-menu-item:hover,
-.tool-menu-item.active {
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
-  color: white;
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
-}
-
-.notification-item {
-  position: relative;
-}
-
-.tool-notification-badge {
-  margin-left: auto;
-  background: #2563eb;
-  color: white;
-  font-size: 12px;
-  font-weight: 800;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-}
-
-.tool-sidebar-train {
-  position: absolute;
-  left: -20px;
-  bottom: 70px;
-  width: 230px;
-  opacity: 0.85;
-  pointer-events: none;
-  object-fit: contain;
-  filter:
-    drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35))
-    brightness(1.05);
-  z-index: 0;
-}
-
-.tool-user-card {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 18px;
-  z-index: 2;
-  height: 74px;
-  border-radius: 18px;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: white;
-}
-
-.tool-user-card h3 {
-  margin: 0;
-  font-size: 15px;
-  color: white;
-}
-
-.tool-user-card p {
-  margin: 3px 0 0;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.tool-user-card p span {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: #22c55e;
-  border-radius: 50%;
-  margin-right: 6px;
-}
+    width: 260px;
+    background: linear-gradient(180deg, #031b4e 0%, #00112d 100%);
+    padding: 22px 18px;
+    flex-shrink: 0;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tool-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-logo-wrap svg {
+    color: white;
+    background: rgba(37, 99, 235, 0.35);
+    padding: 18px;
+    border-radius: 28px;
+    width: 82px;
+    height: 82px;
+  }
+  
+  .tool-sidebar h2 {
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-menu {
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 10px 0;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.88);
+    cursor: pointer;
+    transition: 0.2s ease;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .tool-menu-item span {
+    color: inherit;
+  }
+  
+  .tool-menu-item svg {
+    color: rgba(255, 255, 255, 0.75);
+    min-width: 24px;
+  }
+  
+  .tool-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .tool-menu-item.active {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    color: white;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+  }
+  
+  .notification-item {
+    position: relative;
+  }
+  
+  .tool-notification-badge {
+    margin-left: auto;
+    background: #2563eb;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  
+  .tool-user-card {
+    margin-top: auto;
+    height: 72px;
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-user-card h3 {
+    margin: 0;
+    font-size: 15px;
+    color: white;
+  }
+  
+  .tool-user-card p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .tool-user-card p span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  
+  .tool-user-card svg {
+    color: white;
+  }
+  
+  .tool-user-card > svg:last-child {
+    margin-left: auto;
+  }
+  
+  .tool-logout-button {
+    margin-left: auto;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.16);
+    color: #f87171;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .tool-logout-button:hover {
+    background: #ef4444;
+    color: white;
+  }
+  
+  .tool-logout-button svg {
+    color: currentColor;
+  }
+  .tool-sidebar h2 {
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-logo-wrap svg {
+    color: white;
+    background: rgba(37, 99, 235, 0.35);
+    padding: 18px;
+    border-radius: 28px;
+    width: 82px;
+    height: 82px;
+  }
+  
+  .tool-sidebar h2 {
+    color: white;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 28px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-menu {
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 10px 0;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.88);
+    cursor: pointer;
+    transition: 0.2s ease;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .tool-menu-item span {
+    color: inherit;
+  }
+  
+  .tool-menu-item svg {
+    color: rgba(255, 255, 255, 0.75);
+    min-width: 24px;
+  }
+  
+  .tool-menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .tool-menu-item.active {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    color: white;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+  }
+  
+  .notification-item {
+    position: relative;
+  }
+  
+  .tool-notification-badge {
+    margin-left: auto;
+    background: #2563eb;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  
+  .tool-user-card {
+    margin-top: auto;
+    height: 72px;
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .tool-user-card h3 {
+    margin: 0;
+    font-size: 15px;
+    color: white;
+  }
+  
+  .tool-user-card p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .tool-user-card p span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  
+  .tool-user-card svg {
+    color: white;
+  }
+  
+  .tool-user-card > svg:last-child {
+    margin-left: auto;
+  }
+  
+  .tool-logout-button {
+    margin-left: auto;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.16);
+    color: #f87171;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .tool-logout-button:hover {
+    background: #ef4444;
+    color: white;
+  }
+  
+  .tool-logout-button svg {
+    color: currentColor;
+  }
 
 /* CONTENT */
 

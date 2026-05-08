@@ -20,6 +20,7 @@ import {
   Circle,
   Activity
 } from "lucide-react";
+import useAutoLogout from "../../Pages/useAutoLogout";
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -62,6 +63,7 @@ function AdminStatCard({ icon, title, value, className }) {
 
 export default function AdminPanel() {
   const navigate = useNavigate();
+  useAutoLogout();
   const currentUser = localStorage.getItem("currentUser") || "Admin";
   const [activeTab, setActiveTab] = useState("users");
 
