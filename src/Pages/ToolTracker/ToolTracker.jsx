@@ -1,4 +1,6 @@
 import "./ToolTracker.css";
+import useAutoLogout from "../useAutoLogout";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   Home,
@@ -25,10 +27,9 @@ import {
   Ruler,
   MoreHorizontal,
   ArrowRight,
-  FilePlus,
   Users
 } from "lucide-react";
-import useAutoLogout from "../../Pages/useAutoLogout";
+
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -100,22 +101,31 @@ function CategoryCard({ icon, title, count, className }) {
 }
 
 export default function ToolTracker() {
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  useAutoLogout();
     const navigate = useNavigate();
-    useAutoLogout();
     const currentUser = localStorage.getItem("currentUser") || "Not logged in";
 
   return (
     <div className="tool-page">
-      <aside className="tool-sidebar">
+      {mobileSidebarOpen && (
+  <div
+    className="sidebar-overlay"
+    onClick={() => setMobileSidebarOpen(false)}
+  />
+)}
+      <aside className={`tool-sidebar ${mobileSidebarOpen ? "mobile-open" : ""}`}>
+        <button
+  className="close-sidebar-btn"
+  onClick={() => setMobileSidebarOpen(false)}
+>
+  ✕
+</button>
         <div className="tool-logo-wrap">
           <TrainFront size={64} strokeWidth={2.5} />
         </div>
 
-        <h2>
-  RAILWAY
-  <br />
-  MAINTENANCE SYSTEM
-</h2>
+        <h2>Railway Maintenance System</h2>
 
         <nav className="tool-menu">
           <NavLink to="/dashboard" className="tool-menu-item">
@@ -133,7 +143,7 @@ export default function ToolTracker() {
             <span>Tool Tracker</span>
           </NavLink>
 
-          <NavLink to="/rail-map" className="tool-menu-item">
+          <NavLink to="/railmap" className="tool-menu-item">
             <Map size={22} />
             <span>Rail Map</span>
           </NavLink>
@@ -175,6 +185,12 @@ export default function ToolTracker() {
 
       <main className="tool-content">
         <header className="tool-header">
+          <button
+  className="mobile-menu-btn"
+  onClick={() => setMobileSidebarOpen(true)}
+>
+  ☰
+</button>
           <div>
             <h1>Tool Tracker</h1>
             <p>Scan, track and manage maintenance tools</p>

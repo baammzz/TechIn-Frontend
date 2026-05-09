@@ -246,3 +246,80 @@ body,
     font-size: 14px;
     font-weight: 700;
   }
+
+  /* =========================
+   MOBILE RESPONSIVE LOGIN
+========================= */
+
+@media (max-width: 768px) {
+
+  .login-page {
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .login-left {
+    padding: 40px 24px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .login-brand {
+    max-width: 100%;
+  }
+
+  .login-brand h1 {
+    font-size: 42px;
+    line-height: 48px;
+  }
+
+  .login-brand p {
+    font-size: 16px;
+    line-height: 26px;
+    max-width: 100%;
+  }
+
+  .login-features {
+    margin-top: 28px;
+    width: 100%;
+  }
+
+  .login-features div {
+    min-width: unset;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .login-right {
+    padding: 24px;
+  }
+
+  .login-card {
+    max-width: 100%;
+    padding: 28px 22px;
+    border-radius: 24px;
+  }
+
+  .login-card h2 {
+    font-size: 42px;
+    line-height: 46px;
+  }
+
+  .login-card-header p {
+    font-size: 16px;
+  }
+
+  .login-input {
+    width: 100%;
+  }
+
+  .login-button {
+    width: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}

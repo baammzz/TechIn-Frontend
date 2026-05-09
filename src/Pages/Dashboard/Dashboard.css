@@ -524,3 +524,191 @@ body,
 .yellow {
   color: #f59e0b;
 }
+
+/* =========================
+   MOBILE SIDEBAR
+========================= */
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.close-sidebar-btn {
+  display: none;
+}
+
+.sidebar-overlay {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-bottom: 12px;
+  }
+
+  .sidebar {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    z-index: 2000;
+    transition: left 0.3s ease;
+    pointer-events: auto;
+  }
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+
+  .close-sidebar-btn {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 18px;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    pointer-events: auto;
+  }
+}
+
+/* =========================
+   MOBILE DASHBOARD LAYOUT
+========================= */
+
+@media (max-width: 768px) {
+
+  html,
+  body,
+  #root {
+    overflow-x: hidden;
+    height: auto;
+  }
+
+  .page {
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  .content {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* TOPBAR */
+
+  .topbar {
+    height: auto;
+    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .topbar h1 {
+    font-size: 26px;
+    line-height: 32px;
+  }
+
+  .welcome-text {
+    font-size: 13px;
+  }
+
+  .operator {
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  /* MAIN GRID */
+
+  .upper-section {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  /* ACTIVITY BOX */
+
+  .activity-box {
+    height: auto;
+  }
+
+  .activity-row {
+    min-height: unset;
+    padding: 12px;
+  }
+
+  .activity-row h3 {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .activity-row p {
+    font-size: 13px;
+  }
+
+  /* MAP */
+
+  .rail-map {
+    height: auto;
+  }
+
+  .rail-map img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* STATS */
+
+  .stats-section {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 18px 24px;
+  }
+
+  .stat-card {
+    height: auto;
+    min-height: 160px;
+  }
+
+  .stat-card h2 {
+    font-size: 42px;
+    line-height: 48px;
+  }
+
+  .stat-card p {
+    font-size: 14px;
+  }
+
+  .section-heading {
+    font-size: 16px;
+  }
+}
