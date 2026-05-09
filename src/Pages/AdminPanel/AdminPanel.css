@@ -482,26 +482,67 @@ body,
     cursor: pointer;
   }
 
-  .audit-pill {
-    display: inline-flex;
+  /* MOBILE SIDEBAR */
+
+.mobile-menu-btn {
+  display: none;
+}
+
+.close-sidebar-btn {
+  display: none;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .mobile-menu-btn {
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 800;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-bottom: 12px;
   }
-  
-  .audit-pill.success {
-    color: #16a34a;
-    background: rgba(34, 197, 94, 0.12);
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    z-index: 2000;
+    transition: left 0.3s ease;
   }
-  
-  .audit-pill.warning {
-    color: #f59e0b;
-    background: rgba(245, 158, 11, 0.14);
+
+  .admin-sidebar.mobile-open {
+    left: 0;
   }
-  
-  .audit-table td {
-    height: 64px;
+
+  .close-sidebar-btn {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 18px;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
   }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 999;
+  }
+}

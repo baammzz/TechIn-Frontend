@@ -1,4 +1,6 @@
 import "./Dashboard.css";
+import useAutoLogout from "../useAutoLogout";
+import { useState } from "react";
 import {
   Home,
   AlertCircle,
@@ -12,14 +14,15 @@ import {
   ClipboardList,
   Zap,
   ShieldCheck,
-  FilePlus,
-  LogOut
+  LogOut,
+  ScanLine
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import railMap from "../../assets/map.png";
-import useAutoLogout from "../../Pages/useAutoLogout";
+
 
 const currentUser = localStorage.getItem("currentUser");
+
 
 function ActivityRow({ icon, iconClass, title, subtitle }) {
   return (
@@ -45,13 +48,34 @@ function StatCard({ title, value, colourClass, cardClass, icon }) {
 }
 
 export default function Dashboard() {
+
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+  useAutoLogout();
+
   const currentUser = localStorage.getItem("currentUser") || "Not logged in";
   const navigate = useNavigate();
-  useAutoLogout();
   return (
     <div className="page">
+      {mobileSidebarOpen && (
+    <div
+      className="sidebar-overlay"
+      onClick={() => setMobileSidebarOpen(false)}
+    />
+  )}
       {/* SIDEBAR */}
-      <aside className="sidebar">
+      <aside
+  className={`sidebar ${mobileSidebarOpen ? "mobile-open" : ""}`}
+  onClick={(e) => e.stopPropagation()}
+>
+
+        <button
+  className="close-sidebar-btn"
+  onClick={() => setMobileSidebarOpen(false)}
+>
+  ✕
+</button>
+
   <div className="logo-wrap">
     <TrainFront size={64} strokeWidth={2.5} />
   </div>
@@ -74,10 +98,15 @@ export default function Dashboard() {
       <span>Tool Tracker</span>
     </NavLink>
 
-    <NavLink to="/rail-map" className="menu-item">
+    <NavLink to="/railmap" className="menu-item">
       <Map size={22} />
       <span>Rail Map</span>
     </NavLink>
+
+    <NavLink to="/ar" className="menu-item">
+  <ScanLine size={22} />
+  <span>AR Interface</span>
+</NavLink>
 
     <NavLink to="/notifications" className="menu-item notification-item">
       <Bell size={22} />
@@ -105,25 +134,38 @@ export default function Dashboard() {
     </div>
     <button
   className="logout-button"
-  onClick={() => navigate("/")}
+  onClick={() => {
+  localStorage.removeItem("currentUser");
+  navigate("/");
+}}
   title="Logout"
 >
   <LogOut size={18} />
 </button>
   </div>
+
 </aside>
 
       {/* MAIN CONTENT */}
       <main className="content">
         {/* TOP BAR */}
         <header className="topbar">
+
+<button
+  className="mobile-menu-btn"
+  onClick={() => setMobileSidebarOpen(true)}
+>
+  ☰
+</button>
+
           <div>
             <p className="welcome-text">Welcome back,</p>
             <h1>Control Room Operator 👋</h1>
           </div>
 
           <div className="operator">
-            <span>13 May 2026</span>
+            <span>Tuesday, 14 May 2024</span>
+            <UserCircle size={38} />
           </div>
         </header>
 

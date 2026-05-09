@@ -9,8 +9,9 @@ export default function useAutoLogout() {
 
   useEffect(() => {
     const logout = () => {
-      localStorage.removeItem("user");
+      localStorage.removeItem("currentUser");
       localStorage.removeItem("role");
+
       navigate("/");
     };
 

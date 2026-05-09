@@ -1,6 +1,7 @@
 import "./AdminPanel.css";
+import useAutoLogout from "../useAutoLogout";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
 import {
   Home,
   AlertCircle,
@@ -20,7 +21,7 @@ import {
   Circle,
   Activity
 } from "lucide-react";
-import useAutoLogout from "../../Pages/useAutoLogout";
+
 
 const currentUser = localStorage.getItem("currentUser");
 
@@ -62,10 +63,10 @@ function AdminStatCard({ icon, title, value, className }) {
   }
 
 export default function AdminPanel() {
-  const navigate = useNavigate();
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   useAutoLogout();
+  const navigate = useNavigate();
   const currentUser = localStorage.getItem("currentUser") || "Admin";
-  const [activeTab, setActiveTab] = useState("users");
 
   function handleLogout() {
     localStorage.removeItem("currentUser");
@@ -74,7 +75,20 @@ export default function AdminPanel() {
 
   return (
     <div className="admin-page">
-      <aside className="admin-sidebar">
+      {mobileSidebarOpen && (
+  <div
+    className="sidebar-overlay"
+    onClick={() => setMobileSidebarOpen(false)}
+  />
+)}
+      <aside className={`admin-sidebar ${mobileSidebarOpen ? "mobile-open" : ""}`}>
+        <button
+  className="close-sidebar-btn"
+  onClick={() => setMobileSidebarOpen(false)}
+>
+  ✕
+</button>
+
         <div className="admin-logo-wrap">
           <TrainFront size={64} strokeWidth={2.5} />
         </div>
@@ -97,7 +111,7 @@ export default function AdminPanel() {
             <span>Tool Tracker</span>
           </NavLink>
 
-          <NavLink to="/rail-map" className="admin-menu-item">
+          <NavLink to="/railmap" className="admin-menu-item">
             <Map size={22} />
             <span>Rail Map</span>
           </NavLink>
@@ -140,13 +154,20 @@ export default function AdminPanel() {
 
       <main className="admin-content">
         <header className="admin-topbar">
+          <button
+  className="mobile-menu-btn"
+  onClick={() => setMobileSidebarOpen(true)}
+>
+  ☰
+</button>
           <div>
             <p className="admin-welcome">Admin Control</p>
             <h1>User Management Dashboard</h1>
           </div>
 
           <div className="admin-top-user">
-            <span>13 May 2026</span>
+            <span>{currentUser}</span>
+            <UserCircle size={38} />
           </div>
         </header>
 
@@ -181,22 +202,11 @@ export default function AdminPanel() {
         </section>
 
         <div className="admin-tabs">
-  <button
-    className={`admin-tab ${activeTab === "users" ? "active" : ""}`}
-    onClick={() => setActiveTab("users")}
-  >
-    User Management
-  </button>
-
-  <button
-    className={`admin-tab ${activeTab === "audit" ? "active" : ""}`}
-    onClick={() => setActiveTab("audit")}
-  >
-    Audit Logs
-  </button>
+  <button className="admin-tab active">User Management</button>
+  <button className="admin-tab">Audit Logs</button>
 </div>
-{activeTab === "users" && (
-<section className="admin-table-card">
+
+        <section className="admin-table-card">
           <div className="admin-table-header">
             <div>
               <h2>User Accounts</h2>
@@ -252,74 +262,7 @@ export default function AdminPanel() {
           </table>
 
           <button className="admin-view-all">→ View All</button>
-          </section>
-)}
-{activeTab === "audit" && (
-  <section className="admin-table-card">
-    <div className="admin-table-header">
-      <div>
-        <h2>Audit Logs</h2>
-        <p>Track account activity and system actions</p>
-      </div>
-    </div>
-
-    <table className="admin-user-table audit-table">
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>User</th>
-          <th>Action</th>
-          <th>Details</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>Today 14:47</td>
-          <td>Admin</td>
-          <td>User Updated</td>
-          <td>Changed Engineer permissions</td>
-          <td>
-            <span className="audit-pill success">Completed</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td>Today 13:17</td>
-          <td>Engineer</td>
-          <td>Tool Scan</td>
-          <td>Scanned tools at Victoria Station</td>
-          <td>
-            <span className="audit-pill success">Completed</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td>Today 12:52</td>
-          <td>Admin</td>
-          <td>Login</td>
-          <td>Admin signed in</td>
-          <td>
-            <span className="audit-pill success">Completed</span>
-          </td>
-        </tr>
-
-        <tr>
-          <td>Yesterday 17:48</td>
-          <td>Michael.A</td>
-          <td>Logout</td>
-          <td>Engineer session ended</td>
-          <td>
-            <span className="audit-pill warning">Logged</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <button className="admin-view-all">→ View All</button>
-  </section>
-)}
+        </section>
       </main>
     </div>
   );
