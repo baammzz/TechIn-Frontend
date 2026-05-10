@@ -27,7 +27,7 @@ import {
   Ruler,
   MoreHorizontal,
   ArrowRight,
-  Users
+  Users,
 } from "lucide-react";
 
 
@@ -73,17 +73,19 @@ function SummaryCard({ icon, title, value, className }) {
   );
 }
 
-function ActionCard({ icon, title, text, className }) {
+function ActionCard({ icon, title, text, className, onClick }) {
   return (
     <div className={`tool-action-card ${className}`}>
       <div className="action-icon">{icon}</div>
+
       <div>
         <h3>{title}</h3>
         <p>{text}</p>
       </div>
-      <button>
-  <ArrowRight size={22} />
-</button>
+
+      <button onClick={onClick}>
+        <ArrowRight size={22} />
+      </button>
     </div>
   );
 }
@@ -121,9 +123,9 @@ export default function ToolTracker() {
 >
   ✕
 </button>
-        <div className="tool-logo-wrap">
-          <TrainFront size={64} strokeWidth={2.5} />
-        </div>
+        <div className="logo-wrap">
+  <TrainFront size={64} strokeWidth={2.5} />
+</div>
 
         <h2>Railway Maintenance System</h2>
 
@@ -147,6 +149,11 @@ export default function ToolTracker() {
             <Map size={22} />
             <span>Rail Map</span>
           </NavLink>
+
+          <NavLink to="/ar" className="menu-item">
+  <ScanLine size={22} />
+  <span>AR Interface</span>
+</NavLink>
 
           <NavLink to="/notifications" className="tool-menu-item notification-item">
             <Bell size={22} />
@@ -340,6 +347,7 @@ export default function ToolTracker() {
               title="Report a New Tool Fault"
               text="Report damaged, lost or malfunctioning tools"
               className="report"
+              onClick={() => navigate("/report-tool")}
             />
 
             <ActionCard
@@ -354,6 +362,7 @@ export default function ToolTracker() {
               title="Material Stock"
               text="Check bolts, screws, cables and stock availability"
               className="stock"
+              onClick={() => navigate("/materials")}
             />
           </div>
         </section>

@@ -6,19 +6,25 @@ import {
   Bell,
   AlertTriangle,
   Wrench,
+  TrainFront,
   CheckCircle2,
   Info,
   ChevronRight,
-  LayoutDashboard,
+  Home,
   Map,
   Settings,
   ShieldAlert,
   LogOut,
+  Users,
+  ScanLine,
+  UserCircle,
 } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Notifications() {
+  const currentUser =
+  localStorage.getItem("currentUser") || "Not logged in";
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   useAutoLogout();
   const notifications = [
@@ -103,8 +109,8 @@ export default function Notifications() {
 </button>
         <div>
           <div className="logo-wrap">
-            <Bell />
-          </div>
+  <TrainFront size={64} strokeWidth={2.5} />
+</div>
 
           <h2>
             Railway
@@ -114,7 +120,7 @@ export default function Notifications() {
 
           <div className="menu">
             <Link className="menu-item" to="/dashboard">
-              <LayoutDashboard />
+              <Home size={22} />
               <span>Dashboard</span>
             </Link>
 
@@ -133,6 +139,11 @@ export default function Notifications() {
               <span>Rail Map</span>
             </Link>
 
+            <NavLink to="/ar" className="menu-item">
+  <ScanLine size={22} />
+  <span>AR Interface</span>
+</NavLink>
+
             <Link
               className="menu-item active notification-item"
               to="/notifications"
@@ -147,11 +158,19 @@ export default function Notifications() {
               <Settings />
               <span>Settings</span>
             </Link>
+
+          {currentUser === "Admin" && (
+  <NavLink to="/admin" className="menu-item">
+    <Users size={22} />
+    <span>Admin Panel</span>
+  </NavLink>
+)}
+
           </div>
         </div>
 
         <div className="sidebar-user-card">
-          <Bell />
+          <UserCircle size={38} />
 
           <div>
             <h3>Admin</h3>

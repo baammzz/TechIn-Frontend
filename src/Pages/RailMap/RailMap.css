@@ -262,9 +262,6 @@
 }
 
 @media (max-width: 850px) {
-  .sidebar {
-    display: none;
-  }
 
   .rail-summary-grid {
     padding: 20px;
@@ -283,3 +280,4 @@
     padding: 0 20px;
   }
 }
+

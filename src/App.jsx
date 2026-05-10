@@ -9,6 +9,10 @@ import Notifications from "./Pages/Notifications/Notifications.jsx";
 import Settings from "./Pages/Settings/Settings.jsx";
 import RailMap from "./Pages/RailMap/RailMap.jsx";
 import ARInterface from "./Pages/ARInterface/ARInterface.jsx";
+import "./Pages/Dashboard/Dashboard.css";
+import MaterialStock from "./Pages/MaterialStock/MaterialStock.jsx";
+import ReportToolFault from "./Pages/ReportToolFault/ReportToolFault.jsx";
+import TrainFaultReport from "./Pages/TrainFaultReport/TrainFaultReport";
 
 function App() {
   return (
@@ -20,10 +24,13 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/faults" element={<FaultDashboard />} />
       <Route path="/tools" element={<ToolTracker />} />
+      <Route path="/materials" element={<MaterialStock />} />
+      <Route path="/report-tool" element={<ReportToolFault />} />
       <Route path="/notifications" element={<Notifications />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/railmap" element={<RailMap />} />
       <Route path="/ar" element={<ARInterface />} />
+      <Route path="/report-fault" element={<TrainFaultReport />} />
       <Route
   path="/admin"
   element={

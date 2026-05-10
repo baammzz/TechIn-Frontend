@@ -8,7 +8,8 @@ import { useState } from "react";
 import {
   Bell,
   Map,
-  LayoutDashboard,
+  Users,
+  TrainFront,
   AlertTriangle,
   Wrench,
   Settings,
@@ -19,13 +20,18 @@ import {
   Triangle,
   MapPinned,
   Activity,
+  ScanLine,
+  UserCircle,
+  Home,
 } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 export default function RailMap() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const currentUser =
+  localStorage.getItem("currentUser") || "Not logged in";
   useAutoLogout();
   const alerts = [
     {
@@ -71,13 +77,25 @@ export default function RailMap() {
 
   return (
     <div className="page rail-page">
+    {mobileSidebarOpen && (
+  <div
+    className="sidebar-overlay"
+    onClick={() => setMobileSidebarOpen(false)}
+  />
+)}
       {/* SIDEBAR */}
 
-      <aside className="sidebar">
+      <aside className={`sidebar ${mobileSidebarOpen ? "mobile-open" : ""}`}>
+        <button
+  className="close-sidebar-btn"
+  onClick={() => setMobileSidebarOpen(false)}
+>
+  ✕
+</button>
         <div>
           <div className="logo-wrap">
-            <Map />
-          </div>
+  <TrainFront size={64} strokeWidth={2.5} />
+</div>
 
           <h2>
             Railway
@@ -87,7 +105,7 @@ export default function RailMap() {
 
           <div className="menu">
             <Link className="menu-item" to="/dashboard">
-              <LayoutDashboard />
+              <Home size={22} />
               <span>Dashboard</span>
             </Link>
 
@@ -106,6 +124,11 @@ export default function RailMap() {
               <span>Rail Map</span>
             </Link>
 
+            <NavLink to="/ar" className="menu-item">
+  <ScanLine size={22} />
+  <span>AR Interface</span>
+</NavLink>
+
             <Link className="menu-item" to="/notifications">
               <Bell />
               <span>Notifications</span>
@@ -117,11 +140,19 @@ export default function RailMap() {
               <Settings />
               <span>Settings</span>
             </Link>
+
+           {currentUser === "Admin" && (
+  <NavLink to="/admin" className="menu-item">
+    <Users size={22} />
+    <span>Admin Panel</span>
+  </NavLink>
+)}
+
           </div>
         </div>
 
         <div className="sidebar-user-card">
-          <UserCog />
+          <UserCircle size={38} />
 
           <div>
             <h3>Admin</h3>
@@ -148,6 +179,12 @@ export default function RailMap() {
 
       <main className="content">
         <div className="topbar">
+          <button
+  className="mobile-menu-btn"
+  onClick={() => setMobileSidebarOpen(true)}
+>
+  ☰
+</button>
           <div>
             <p className="welcome-text">
               Live railway monitoring and maintenance activity tracking
