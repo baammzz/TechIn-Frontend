@@ -19,7 +19,8 @@ import {
   Pencil,
   Trash2,
   Circle,
-  Activity
+  Activity,
+  ScanLine,
 } from "lucide-react";
 
 
@@ -115,6 +116,11 @@ export default function AdminPanel() {
             <Map size={22} />
             <span>Rail Map</span>
           </NavLink>
+
+          <NavLink to="/ar" className="menu-item">
+  <ScanLine size={22} />
+  <span>AR Interface</span>
+</NavLink>
 
           <NavLink to="/notifications" className="admin-menu-item notification-item">
             <Bell size={22} />
