@@ -8,21 +8,27 @@ import {
   Bell,
   Settings as SettingsIcon,
   Moon,
+  TrainFront,
   Shield,
   Lock,
   Smartphone,
   Database,
   UserCog,
   LogOut,
-  LayoutDashboard,
   AlertTriangle,
   Wrench,
   Map,
+  Users,
+  ScanLine,
+  UserCircle,
+  Home,
 } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Settings() {
+  const currentUser =
+  localStorage.getItem("currentUser") || "Not logged in";
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   useAutoLogout();
   const [darkMode, setDarkMode] = useState(() => {
@@ -41,13 +47,25 @@ export default function Settings() {
 
   return (
     <div className="page">
+      {mobileSidebarOpen && (
+  <div
+    className="sidebar-overlay"
+    onClick={() => setMobileSidebarOpen(false)}
+  />
+)}
       {/* SIDEBAR */}
 
-      <aside className="sidebar">
+      <aside className={`sidebar ${mobileSidebarOpen ? "mobile-open" : ""}`}>
+        <button
+  className="close-sidebar-btn"
+  onClick={() => setMobileSidebarOpen(false)}
+>
+  ✕
+</button>
         <div>
           <div className="logo-wrap">
-            <SettingsIcon />
-          </div>
+  <TrainFront size={64} strokeWidth={2.5} />
+</div>
 
           <h2>
             Railway
@@ -57,7 +75,7 @@ export default function Settings() {
 
           <div className="menu">
             <Link className="menu-item" to="/dashboard">
-              <LayoutDashboard />
+              <Home size={22} />
               <span>Dashboard</span>
             </Link>
 
@@ -76,6 +94,11 @@ export default function Settings() {
               <span>Rail Map</span>
             </Link>
 
+            <NavLink to="/ar" className="menu-item">
+              <ScanLine size={22} />
+              <span>AR Interface</span>
+             </NavLink>
+
             <Link className="menu-item" to="/notifications">
               <Bell />
               <span>Notifications</span>
@@ -87,11 +110,19 @@ export default function Settings() {
               <SettingsIcon />
               <span>Settings</span>
             </Link>
+
+              {currentUser === "Admin" && (
+             <NavLink to="/admin" className="menu-item">
+              <Users size={22} />
+              <span>Admin Panel</span>
+             </NavLink>
+)}
+
           </div>
         </div>
 
         <div className="sidebar-user-card">
-          <UserCog />
+          <UserCircle size={38} />
 
           <div>
             <h3>Admin</h3>
@@ -102,9 +133,15 @@ export default function Settings() {
             </p>
           </div>
 
-          <button className="logout-button">
-            <LogOut size={18} />
-          </button>
+          <button
+  className="logout-button"
+  onClick={() => {
+    localStorage.removeItem("currentUser");
+    window.location.href = "/";
+  }}
+>
+  <LogOut size={18} />
+</button>
         </div>
       </aside>
 
@@ -191,17 +228,16 @@ export default function Settings() {
             </div>
 
             <div className="setting-row">
-              <div>
-                <h3>Two-Factor Authentication</h3>
-                <p>Require secondary verification during login</p>
-              </div>
-
-              <label className="switch">
-                <input type="checkbox" checked readOnly />
-
-                <span className="slider"></span>
-              </label>
+               <div>
+              <h3>Multi-Layer Security Protection</h3>
+              <p>Advanced authentication and railway system protection enabled</p>
             </div>
+
+             <div className="encrypted-badge">
+              <Lock size={16} />
+                Active
+              </div>
+           </div>
 
             <div className="setting-row">
               <div>

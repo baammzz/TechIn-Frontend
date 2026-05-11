@@ -16,7 +16,8 @@ import {
   ShieldCheck,
   Shield,
   AlertTriangle,
-  LogOut
+  LogOut,
+  ScanLine,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -107,6 +108,11 @@ export default function FaultDashboard() {
       <span>Rail Map</span>
     </NavLink>
 
+    <NavLink to="/ar" className="menu-item">
+  <ScanLine size={22} />
+  <span>AR Interface</span>
+</NavLink>
+
     <NavLink
       to="/notifications"
       className="fault-menu-item notification-item"
@@ -155,7 +161,18 @@ export default function FaultDashboard() {
 >
   ☰
 </button>
-          <h1>Fault Dashboard <span>⚠️</span></h1>
+          <div className="fault-top-left">
+
+  <h1>Fault Dashboard <span>⚠️</span></h1>
+
+  <button
+    className="report-fault-btn"
+    onClick={() => navigate("/report-fault")}
+  >
+    Report a New Fault
+  </button>
+
+</div>
 
           <div className="fault-operator">
             <span>Control Room Operator</span>
